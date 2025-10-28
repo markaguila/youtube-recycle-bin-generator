@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Recycle Bin Generator</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    button {
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background-color: #cc0000;
+    }
+    #query {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      background: #1a1a1a;
+      padding: 10px 20px;
+      border-radius: 6px;
+      user-select: all;
+    }
+    #copied {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #00ff9d;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <h1>YouTube Recycle Bin Query Generator</h1>
+  <button onclick="generateQuery()">Send me to the backrooms</button>
+  <div id="query">Click the button to get started</div>
+  <div id="copied">Copied to clipboard!</div>
+
+  <script>
+    const templates = [
+      "YYYYMMDD",
+      "WIN YYYYMMDD",
+      "Capture YYYYMMDD",
+      "VID YYYYMMDD",
+      "InShot YYYYMMDD",
+      "WhatsApp Video YYYY",
+      "YouCut YYYYMMDD",
+      "Video YYYYMMDD",
+      "Desktop YYYY MM DD",
+      "PXL YYYYMMDD",
+
+
+      "Copy of Copy of",
+      "My Edited Video",
+      "FullSizeRender",
+      "RPReplay",
+      "/Storage/Emulated",
+      "DVR",
+      "VLC Record",
+      "Robloxapp",
+      ".MP4",
+      ".3gp",
+      ".MOV",
+      ".AVI",
+      ".WMV",
+      ".FLAC",
+      ".WAV",
+      "lv 0",
+      "bmdjAAAF",
+      "Untitled video",
+      "com oculus vrshell",
+      "com oculus metacam",
+      "Recording gvo",
+      "You have new picture mail! (video)",
+      "Media1.3gp",
+      "Media1.3g2",
+      "Video.3g2",
+      "New Multimedia Message",
+      "Multimedia Message",
+      "Video from my phone",
+      "Video uploaded from my mobile phone",
+      "My Slideshow Video",
+      "My Slideshow",
+      "My Stupeflix Video",
+
+      "My Stupeflix Video XXXX",
+      "My Movie X",
+      "IMG XXXX",
+      "MVI XXXX",
+      "MOV XXXX",
+      "100 XXXX",
+      "SAM XXXX",
+      "DSC XXXX",
+      "SDV XXXX",
+      "DSCFXXXX",
+      "DSCNXXXX",
+      "PICTXXXX",
+      "MAQ0XXXX",
+      "FILEXXXX",
+      "GOPRXXXX",
+      "GP01XXXX",
+      "HNI 0XXX",
+      "WA0XXX",
+      "MOL0XX",
+      "P100XXXX",
+      "DJI XXXX",
+      "VTS XX X",
+      "VTS XXX 1",
+      "VTS 01 XXX",
+      "Video0XX",
+      "Vid0XX (00-10)",
+      "MOV000XX"
+    ];
+
+    function randomDigits(count) {
+      return Array.from({ length: count }, () => Math.floor(Math.random() * 10)).join('');
+    }
+
+    function randomDate() {
+      const year = Math.floor(Math.random() * (2025 - 2006 + 1)) + 2006;
+      const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+      const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+      return `${year}${month}${day}`;
+    }
+
+    function generateQuery() {
+      let template = templates[Math.floor(Math.random() * templates.length)];
+
+      // Handle both YYYYMMDD and spaced YYYY MM DD patterns
+      template = template.replace(/YYYY\s?MM\s?DD/g, match => {
+        const year = Math.floor(Math.random() * (2025 - 2006 + 1)) + 2006;
+        const month = String(Math.floor(Math.random() * 12) + 1).padStart(2, '0');
+        const day = String(Math.floor(Math.random() * 28) + 1).padStart(2, '0');
+        // If the match contains spaces, keep that spacing
+        return match.includes(' ') ? `${year} ${month} ${day}` : `${year}${month}${day}`;
+      });
+
+      // Replace XXXX, XX, and X groups
+      template = template.replace(/XXXX/g, randomDigits(4));
+      template = template.replace(/XX/g, randomDigits(2));
+      template = template.replace(/X/g, randomDigits(1));
+
+      const query = `"${template}"`;
+
+      const queryElement = document.getElementById('query');
+      const copiedElement = document.getElementById('copied');
+      queryElement.textContent = query;
+
+      navigator.clipboard.writeText(query).then(() => {
+        copiedElement.style.opacity = 1;
+        setTimeout(() => copiedElement.style.opacity = 0, 1500);
+      });
+    }
+
+  </script>
+</body>
+
+<footer>
+  <p>
+    Inspired by <strong>KVN AUST</strong>’s
+    <em>"YouTube’s Recycle Bin & The Internet’s Largest Video Graveyard"</em>.
+    <br>
+    Read the full document
+    <a href="https://docs.google.com/document/d/1mV5PhumaIJ8mtH8XmohqXkk5fjK_HlqcineMccPQm5A/edit?tab=t.0" target="_blank" rel="noopener noreferrer">here</a>
+    and explore his Youtube channel
+    <a href="https://www.youtube.com/@KVNAUST" target="_blank" rel="noopener noreferrer">here</a>.
+  </p>
+</footer>
+
+
+</html>
